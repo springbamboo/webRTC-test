@@ -4,18 +4,39 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="https://cdn.webrtc.ecl.ntt.com/skyway-4.4.5.js"></script>
     <title>WebRTC Demo</title>
+    <style>
+        h1,#id-show {
+            text-align: center;
+        }
+        .video {
+            width: 350px;
+            height: 265px;
+            margin:10px;
+            border-style: solid;
+        }
+        #call-video {
+            display: flex;
+            justify-content: center;
+        }
+        #their-id {
+            margin-right: 10px;
+        }
+        .video-show {
+            display: flex;
+            justify-content: center;
+        }
+    </style>
 </head>
 <body>
-    <div>
-        <video id="my-video" width="400px" autoplay playsinline></video>
-    </div>
-        <span>Your ID: <p id="my-id"></p></span>
-    <div>
-        <video id="their-video" width="400px" autoplay muted playsinline></video>
-    </div>
-    <div>
-        <input id="their-id"></input>
+    <h1>WebRTC Demo</h1>
+    <div id="id-show">自分のID: <span id="my-id"></span></div>
+    <div id="call-video">
+        <input id="their-id" placeholder="相手のIDを入力"></input>
         <button id="make-call">Call</button>
+    </div>
+    <div class="video-show">
+        <video class="video" id="my-video" autoplay muted playsinline></video>
+        <video class="video" id="their-video" autoplay muted playsinline></video>
     </div>
     <script>
         let localStream;
@@ -30,8 +51,8 @@
         })
         const peer = new Peer({
             key: '1ee0975c-ad3e-4bf6-ae6e-8b15dfc79730',
-            debug: 3
         });
+
         peer.on('open', () => {
             document.getElementById('my-id').textContent = peer.id;
         });
